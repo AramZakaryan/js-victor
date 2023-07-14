@@ -1,4 +1,4 @@
-// Theme 02. Array Mathods 
+// Theme 02. Array Methods (Part regarding method MAP)
 
 const student = [
     {
