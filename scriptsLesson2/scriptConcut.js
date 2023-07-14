@@ -1,4 +1,4 @@
-// Theme 02. Array Methods (Part regarding method FILTER) 
+// Theme 02. Array Methods (Part regarding method CONCUT)
 
 const student1 = [
     {

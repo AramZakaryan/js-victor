@@ -1,4 +1,4 @@
-// Theme 02. Array Methods (Part regarding method FILTER) 
+// Theme 02. Array Methods (Part regarding method INDEXOF) 
 
 const student = [
     {
@@ -36,4 +36,4 @@ const mySlice = (arr, indStart, indEnd) => {
     return res
 }
 
-console.log(mySlice(student, 1, 3))
+console.log(mySlice(student, 1, 3));

@@ -1,4 +1,4 @@
-// Theme 02. Array Methods (Part regarding method MAP)
+// Theme 02. Array Methods (Part regarding method REVERSE)
 
 const studentEven = [
     {
