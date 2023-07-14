@@ -1,39 +1,23 @@
 // Theme 02. Array Methods (Part regarding method INDEXOF) 
 
-const student = [
-    {
-        name: 'Bob',
-        age: 22,
-        isMarried: true,
-        scores: 85,
-    },
-    {
-        name: 'Alex',
-        age: 21,
-        isMarried: true,
-        scores: 89,
-    },
-    {
-        name: 'Nick',
-        age: 20,
-        isMarried: false,
-        scores: 85,
-    },
-    {
-        name: 'John',
-        age: 19,
-        isMarried: false,
-        scores: 100,
-    },
+const studentNames = [
+    'Bob', 'Alex', 'Nick', 'John'
 ]
 
+const bobikName = 'Bob'
 
-const mySlice = (arr, indStart, indEnd) => {
-    let res = []
-    for (let i = indStart; i < indEnd; i++) {
-        res.push(arr[i])
+console.log(studentNames.indexOf("Alex"))
+console.log(studentNames.indexOf("Alexik"))
+
+
+const myIndexOf = (arr, el) => {
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i]===el) {
+            return i
+        }
     }
-    return res
+    return -1
 }
 
-console.log(mySlice(student, 1, 3));
+console.log(myIndexOf(studentNames, "Alex"));
+console.log(myIndexOf(studentNames, "Alexik"));
