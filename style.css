@@ -1,0 +1,22 @@
+/*lesson 03*/
+
+#small {
+    height: 100px;
+    width: 100px;
+    background-color: green;
+    margin: auto;
+}
+
+#medium {
+    height: 150px;
+    width: 200px;
+    background-color: yellow;
+    margin: auto;
+}
+
+#big {
+    height: 200px;
+    width: 300px;
+    background-color: red;
+    margin: auto;
+}

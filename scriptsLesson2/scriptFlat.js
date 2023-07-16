@@ -12,9 +12,9 @@ const myArr4 = [0, 1, 2, [3, [4, [5, [6, 7], 8], 9], 10, 11], 12, 13]
 const myFlat = (arr, level = 1) => {
 
     let res = [] // Array will be generated if level is 1
-    let resFinal = [] // Array to return
+    let resFinal  // Array to return
 
-    // loop to generate res (in case of level 1)
+    // loop to generate array (in case of level 1)
     for (let i = 0; i < arr.length; i++) {
         if (Array.isArray(arr[i])) {
             for (let j = 0; j < arr[i].length; j++) {
@@ -52,8 +52,11 @@ const myFlat1 = (arr, level = 1) => {
     let res = []
     res[level + 1] = [...arr]
 
-    for (let l = level; l > 0; l--) {
-        res[l] = []
+    for (let l = level; l > 0; l--) { // Alternative of Recursive function
+        
+        res[l] = [] // declaration of res[l] as array
+
+        // loop to generate array (in case of level 1)
         for (let i = 0; i < res[l + 1].length; i++) {
             if (Array.isArray(res[l + 1][i])) {
                 for (let j = 0; j < res[l + 1][i].length; j++) {
@@ -63,6 +66,7 @@ const myFlat1 = (arr, level = 1) => {
                 res[l].push(res[l + 1][i])
             }
         }
+        
     }
     return res[1]
 }
