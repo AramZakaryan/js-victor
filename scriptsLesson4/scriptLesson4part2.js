@@ -79,6 +79,6 @@ for (let i = 1; i < students.length; i++) {
 }
 
 
-console.log(
-    oldest, youngest
-)
+// console.log(
+//     oldest, youngest
+// )
