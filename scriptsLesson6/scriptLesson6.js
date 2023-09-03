@@ -45,11 +45,7 @@ const user = {
 };
 
 
-
-
 // https://www.dev-notes.ru/articles/deep-copying-using-structured-clone/
-
-
 
 
 //1. Поверхностная копия student
@@ -59,15 +55,11 @@ const copyUser = {...user}; // Object
 // console.log(user.friends === copyUser.friends);
 
 
-
-
 //2. Полная (глубокая) копия student
 
 const deepCopyStudent = {...user, friends: [...user.friends]}
 // console.log(user === deepCopyStudent);
 // console.log(user.friends === deepCopyStudent.friends);
-
-
 
 
 // //3. Поверхностная копия students
@@ -82,11 +74,9 @@ const copyStudents = students.slice()
 // console.log(students[0] === copyStudents[0]);
 
 
-
-
 //4*. Полная (глубокая) копия students
 
-const deepCopyStudents = students.map(st=>({...st}))
+const deepCopyStudents = students.map(st => ({...st}))
 
 // console.log(students === deepCopyStudents);
 // console.log(students[0] === deepCopyStudents[0]);
@@ -94,18 +84,12 @@ const deepCopyStudents = students.map(st=>({...st}))
 // console.log(deepCopyStudents);
 
 
-
-
 //Далее все преобразования выполняем не модифицируя исходный массив students
-
-
 
 
 //5. Отсортируйте студентов по успеваемости (лучший идёт первым)
 
 // console.log(deepCopyStudents.sort( (a,b)=>b.scores-a.scores))
-
-
 
 
 //5a. Отсортируйте студентов по алфавиту
@@ -130,70 +114,83 @@ const deepCopyStudents = students.map(st=>({...st}))
 // console.log(sortedByName);
 
 
-
-
 //6. Сформируйте массив студентов, у которых 100 и более баллов
+
 // console.log(deepCopyStudents.filter(st=>st.scores>=100)) 
-
-
 
 
 //6a.Сформируйте массив из трёх лучших студентов
 
+// console.log(deepCopyStudents.sort((st1,st2)=>st2.scores-st1.scores).slice(0,3)) 
+
+// Victor's Version
+// const topStudents = deepCopyStudents.splice(0, 3);
+// console.log(topStudents);
+// console.log(deepCopyStudents);
 
 
+//6b. Объедините массивы deepCopyStudents и topStudents так,
+
+// const studentsSortedBuScores = deepCopyStudents.sort((stA, stB) => stB.scores - stA.scores)
+// const topStudents = studentsSortedBuScores.slice(0, 3)
+
+// console.log([...topStudents, ...studentsSortedBuScores])
 
 
+//7. Сформируйте массив холостых студентов
 
-// // const topStudents = deepCopyStudents.splice(0, 3);
-// // console.log(topStudents);
-// // console.log(deepCopyStudents);
-//
-// //6b. Объедините массивы deepCopyStudents и topStudents так,
-// // чтоб сохранился порядок сортировки
-// const newDeepCopyStudents = [...topStudents, ...deepCopyStudents];
-// console.log(newDeepCopyStudents);
-//
-// //7. Сформируйте массив холостых студентов
-// const notMarriedStudents = students.filter((st) => !st.isMarried);
-// console.log(notMarriedStudents);
-//
-// //8. Сформируйте массив имён студентов
-// const studentsNames = students.map((st) => st.name);
-// console.log(studentsNames);
-// //8a. Сформируйте строку из имён студентов, разделённых
-// // - пробелом
-// // - запятой
-// const nameWithSpace = studentsNames.join(" ");
-// console.log(nameWithSpace);
-// const namesWithComma = studentsNames.join(", ");
-// console.log(namesWithComma);
-//
-// //9. Добавьте всем студентам свойство "isStudent" со значением true
-// const trueStudents = students.map((st) => ({...st, isStudent: true}));
-// console.log(trueStudents);
-//
-// //10. Nick женился. Выполните преобразование массива students
-// // let studentsWithMarriedNick = students.map(st => st.name === "Nick" ? {...st, isMarried: true} : st);
-// const studentsWithMarriedNick = students.map((st) => {
-//     if (st.name === "Nick") {
-//         return {...st, isMarried: true};
-//     }
-//     return st;
-// });
-// console.log(studentsWithMarriedNick);
-//
-// //11. Найдите Студентку по имени Ann
-// const ann = students.find((st) => st.name === "Ann");
-// console.log(ann);
-// console.log(students);
-//
-// //12. Найдите студента с самым высоким баллом
-// const bestStudent = students.reduce((acc, st) => {
-//     return acc.scores > st.scores ? acc : st;
-// });
-// console.log(bestStudent);
-// //12a. Найдите 2 студента с самым высоким баллом
+// console.log(deepCopyStudents.filter(st=>!st.isMarried))
+
+
+//8. Сформируйте массив имён студентов
+
+// console.log(deepCopyStudents.map(st=>st.name))
+
+
+//8a. Сформируйте строку из имён студентов, разделённых
+// - пробелом
+// - запятой
+
+// console.log(deepCopyStudents.map(st=>st.name).join(" "))
+// console.log(deepCopyStudents.map(st=>st.name).join(","))
+
+
+//9. Добавьте всем студентам свойство "isStudent" со значением true
+
+// console.log(deepCopyStudents.map(st=>({...st, isStudent: true})))
+
+
+//10. Nick женился. Выполните преобразование массива students
+
+// console.log(deepCopyStudents.map(st=>st.name==="Nick"?{...st, isMarried:true}:st))
+
+
+//11. Найдите Студентку по имени Ann
+
+// console.log(deepCopyStudents.find(st=>st.name==="Ann"))
+
+
+//12. Найдите студента с самым высоким баллом
+
+// Version 1
+// console.log(deepCopyStudents.sort((stA, stB) => stB.scores - stA.scores)[0])
+
+// Version 2 (Like the Victor's Solution)
+// console.log(deepCopyStudents.reduce((acc, st) => st.scores > acc.scores ? acc = st : acc))
+
+
+//12a. Найдите 2 студента с самым высоким баллом
+
+const bestStudent1 = deepCopyStudents.reduce(
+    (acc, st) => st.scores > acc.scores ? acc = st : acc
+)
+const bestStudent2 = deepCopyStudents.reduce(
+    (acc, st) => (st.scores > acc.scores && st !== bestStudent1) ? acc = st : acc
+)
+// console.log(bestStudent1, bestStudent2)
+
+
+// Victor's Version
 // let bestStudent = students[0];
 // let bestStudent2 = students[1];
 // for (let i = 1; i < students.length; i++) {
@@ -220,30 +217,26 @@ const deepCopyStudents = students.map(st=>({...st}))
 //     }
 //
 // }
-//
-//
-// //13. Найдите сумму баллов всех студентов
-// const scoresSum = students.reduce((acc, st) => acc + st.scores, 0);
-// console.log(scoresSum);
-//
-// // 14.Напишите функцию addFriends, которая принимает параметром массив students и возвращает новый массив, при этом добавляет в каждому студенту свойство .friends, значением которого является массив имён всех остальных студентов из массива, за исключением собственного имени студента. Т.е. в друзьях у Боба Боба быть не должно.
-//
-// // function addFriends(students) {
-// //     const studentsNames = students.map(st => st.name)
-// //     function getFriendsList(student){
-// //         const friendsList = studentsNames.filter(name => student.name !== name)
-// //         return friendsList
-// //     }
-// //     const studentsWithFriends = students.map(st => {
-// //         return {...st, friends: getFriendsList(st)}
-// //     })
-// //     return studentsWithFriends
-//
-// // }
-// const addFriends = (sts) => {
-//     return sts.map((st) => ({
-//         ...st, friends: sts.map((st) => st.name).filter((name) => name !== st.name),
-//     }));
-// };
-//
-// console.log(addFriends(students));
+
+
+//13. Найдите сумму баллов всех студентов
+
+// console.log(deepCopyStudents.reduce((acc, st) => acc + st.scores, 0))
+
+
+// 14.Напишите функцию addFriends, которая принимает параметром массив students 
+// и возвращает новый массив, при этом добавляет в каждому студенту 
+// свойство .friends, значением которого является массив имён 
+// всех остальных студентов из массива, за исключением собственного имени студента. 
+// Т.е. в друзьях у Боба Боба быть не должно.
+
+
+const friendsNames = students.map(st => st.name)
+// console.log(students.map(st => (
+//         {
+//             ...st,
+//             friends: friendsNames.filter(frName => frName !== st.name)
+//         }
+//     )
+// ))
+
